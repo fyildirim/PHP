@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="script.js"></script>
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    	<meta charset="utf-8">	
     </head>
     <body>
     
