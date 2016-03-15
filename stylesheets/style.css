@@ -54,7 +54,7 @@ select {
     -o-background-size: 1600px 32px;
     background-size: 1600px 32px;
 }
-input[type=text] { 
+input[type=text], input[type=email], input[type=password] { 
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #222), color-stop(0.12, #333));
 	background: -moz-gradient(linear, left top, left bottom, color-stop(0, #222), color-stop(0.12, #333));
 	background: -o-gradient(linear, left top, left bottom, color-stop(0, #222), color-stop(0.12, #333));
