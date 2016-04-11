@@ -156,6 +156,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', end
 div.autokader img {
     width: 120px;
     margin: 0;
+    height:80px;
     position: absolute;
     bottom: 0;
     left: 0;
