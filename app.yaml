@@ -18,7 +18,7 @@ handlers:
 # Serve CSS.
 - url: /stylesheets
   static_dir: stylesheets
-
+ 
 # Serve php scripts.
 - url: /(.+\.php)$
   script: \1
