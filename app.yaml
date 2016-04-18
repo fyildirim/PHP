@@ -26,20 +26,5 @@ handlers:
 - url: /
   script: main.php
   
-- url: /helloworld
-  script: /helloworld.php
-
-- url: /busreis
-  script: /busreis.php
-
-- url: /kerstboom
-  script: /kerstboom.php
-
-- url: /whilefor
-  script: /whilefor.php
-
-- url: /zwemclub
-  script: /zwemclub.php
-  
-- url: /kapper
-  script: /kapper.php
+- url: /webshop
+  script: /webshop/webshop.php

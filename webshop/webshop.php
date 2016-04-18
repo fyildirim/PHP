@@ -43,7 +43,7 @@
         }
         
     }
-    
+
     $lijst = array(
         new Auto("Ford", "Fiesta", 23999, "img/fordfiesta.jpg"),
         new Auto("Ford", "Focus", 18995, "img/fordfocus.jpg"),
@@ -64,11 +64,24 @@
         new Auto("Volvo", "V40", 1250, "img/volvov40.jpg"),
         new Auto("Mini", "Cooper", 34495, "img/minicooper.jpg")
     );
-    
+
+    function createDiv($merk, $type, $prijs, $url) {
+        echo "<div class='autokader'>";
+            echo "<p class='merktype'>";
+                echo $merk." ".$type."<br>";
+            echo "</p>";
+            echo "<p class='prijs'>";
+                echo "€ ".number_format($prijs, 2, ",", ".")."<br>";
+            echo "</p>";
+            echo "<img src='webshop/".$url."'><br><br>";
+        echo "</div>";
+    }
 ?>
 
 <html>
 <head>
+    <style>
+    img {width:50px; height:80px;}</style>
     <link rel="stylesheet" href="../stylesheets/style.css">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Webshop PHP</title>
@@ -81,35 +94,46 @@
             <option value="alle">Alle merken</option>
             <?php
                 $merken = array();
-                foreach ($lijst as $auto) {
-                    if (!in_array($auto->getMerk(), $merken)) {
-                        array_push($merken, $auto->getMerk());
+                foreach ($lijst as $item) {
+                    if (!in_array($item->getMerk(), $merken)) {
+                        array_push($merken, $item->getMerk());
                     }
                 }
                 foreach ($merken as $merk) {
                     echo "<option value=".$merk.">".$merk."</option>";
                 }
+
             ?>
         </select>
         <input type="submit" name="submit" value="Ok">
+        <?php echo $errorstr.$errorstr2; ?>
     </form>
 
     <?php
+    $min = $_POST["minprijs"];
+    $max = $_POST["maxprijs"];
+    $merk = $_POST["merk"];
+    
         foreach ($lijst as $auto) {
-            if (!isset($_POST["submit"]) || 
-                (isset($_POST["submit"]) && ($auto->getPrijs() >= $_POST["minprijs"] || 
-                $_POST["minprijs"] == "") && ($auto->getPrijs() <= $_POST["maxprijs"] || 
-                $_POST["maxprijs"] == "") && ($auto->getMerk() == $_POST["merk"] || $_POST["merk"] == "alle"))
-            ) {
-                echo "<div class='autokader'>";
-                    echo "<p class='merktype'>";
-                        echo $auto->getMerk()." ".$auto->getType()."<br>";
-                    echo "</p>";
-                    echo "<p class='prijs'>";
-                        echo "€ ".$auto->getPrijs().",-<br>";
-                    echo "</p>";
-                        echo "<img src='".$auto->getFotoURL()."'><br><br>";
-                echo "</div>";
+            if(!isset($_POST["submit"])) {
+                createDiv($auto->getMerk(), $auto->getType(), $auto->getPrijs(), $auto->getFotoURL());
+            } else {
+                // if(($auto->getPrijs() >= $min && $auto->getPrijs() <= $max) &&
+                //     ($_POST["merk"]) == $auto->getMerk() || $_POST["merk"] == "all"){
+                if(!is_numeric($min)) {
+                    $min = 0;
+
+                }
+                if(!is_numeric($max)) {
+                    $max = 1000000;
+                }
+                if(($merk == "alle" || $merk == $auto->getMerk()) &&
+                    ($auto->getPrijs() >= $min && $auto->getPrijs() <= $max)) {
+                    $errorstr = "";
+                    $errorstr2 = "";
+                    createDiv($auto->getMerk(), $auto->getType(), $auto->getPrijs(), $auto->getFotoURL());
+                }
+
             }
         }
     ?>
